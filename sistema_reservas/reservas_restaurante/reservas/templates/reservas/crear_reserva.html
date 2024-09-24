@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Nueva Reserva</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'reservas/css/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Para la responsividad -->
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Crear Nueva Reserva</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre_cliente">Nombre cliente:</label>
+                <input type="text" name="nombre_cliente" class="form-control" id="nombre_cliente" value="{{ form.nombre_cliente.value }}">
+                {% if form.nombre_cliente.errors %}
+                    <div class="text-danger">{{ form.nombre_cliente.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" name="fecha" class="form-control" id="fecha" value="{{ form.fecha.value }}">
+                {% if form.fecha.errors %}
+                    <div class="text-danger">{{ form.fecha.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora:</label>
+                <input type="time" name="hora" class="form-control" id="hora" value="{{ form.hora.value }}">
+                {% if form.hora.errors %}
+                    <div class="text-danger">{{ form.hora.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="numero_personas">Número de Personas:</label>
+                <input type="number" name="numero_personas" class="form-control" id="numero_personas" value="{{ form.numero_personas.value }}">
+                {% if form.numero_personas.errors %}
+                    <div class="text-danger">{{ form.numero_personas.errors }}</div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Reserva</button>
+        </form>
+        <a href="{% url 'lista_reservas' %}" class="btn btn-secondary mt-3">Volver a la lista de reservas</a>
+    </div>
+</body>
+</html>
